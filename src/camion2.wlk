@@ -35,3 +35,4 @@ object camion {
 	
 	method pesos() = cosas.map({ c => c.peso() })
 }
+

@@ -1,2 +1,104 @@
 import camion.*
 import cosas.*
+
+
+describe "test para paquete de ladrillos"{
+	
+	test "10 ladrillos = 20kg"{
+		paqueteLadrillos.cantLadrillos(10)
+		assert.equals(20, paqueteLadrillos.peso())
+	}
+	
+	test "20 ladrillos = 40kg"{
+		paqueteLadrillos.cantLadrillos(20)
+		assert.equals(40, paqueteLadrillos.peso())
+	}
+	
+	test "30 ladrillos = 60kg"{
+		paqueteLadrillos.cantLadrillos(30)
+		assert.equals(60, paqueteLadrillos.peso())
+	}
+	
+	test "40 ladrillos = 80kg"{
+		paqueteLadrillos.cantLadrillos(40)
+		assert.equals(80, paqueteLadrillos.peso())
+	}
+}
+
+describe "test para bateria anti-aerea"{
+	
+	test "peso con misiles" {
+		//Ya se inicializa con misiles.
+		assert.equals(300, bateriaAntiaerea.peso())
+	}
+	
+	test "nivel de peligrosidad con misiles" {
+		//Ya se inicializa con misiles.
+		assert.equals(100, bateriaAntiaerea.nivelPeligrosidad())
+	}
+	
+	test "peso sin misiles" {
+		//Usamos cambiarEstadoMisiles() para cambiar de estado la variable.
+		bateriaAntiaerea.cambiarEstadoMisiles()
+		assert.equals(200, bateriaAntiaerea.peso())	
+	}
+	
+	test "nivel de peligrosidad sin misiles" {
+		//Usamos cambiarEstadoMisiles() para cambiar de estado la variable.
+		bateriaAntiaerea.cambiarEstadoMisiles()
+		assert.equals(0, bateriaAntiaerea.nivelPeligrosidad())	
+	}
+}
+
+describe "test para contenedor portuario" {
+	
+	test "controlamos peso de knightrider, residuosradioactivos" {
+		//Primero agregamos los objetos a la lista.
+		contenedor.agregarCosa(knightRider)
+		contenedor.agregarCosa(residuosRadioactivos)
+		//Asignamos peso a los residuosRadioactivos
+		residuosRadioactivos.peso(200)
+		//Controlamos el peso total teniendo en cuenta que siempre se le suma 100 (nos deberia dar 800).
+		assert.equals(800, contenedor.peso())
+	}
+	
+	test "nivel de peligrosidad vacio" {
+		assert.equals(0, contenedor.nivelPeligrosidad())
+	}
+	
+	test "nivel de peligrosidad con ladrillos, knightrider, residuos" {
+		//Agregamos los objetos
+		contenedor.agregarCosa(knightRider)
+		contenedor.agregarCosa(residuosRadioactivos)
+		contenedor.agregarCosa(paqueteLadrillos)
+		//Nos deberia dar 200, ya que nos devuelve el que mayor peligrosidad tiene.
+		assert.equals(200, contenedor.nivelPeligrosidad())
+		
+	}
+}
+
+describe "test embalaje de seguridad." {
+	
+	test "peso de residuos radioactivos." {
+		residuosRadioactivos.peso(30)
+		embalajeSeguridad.objeto(residuosRadioactivos)
+		assert.equals(30, embalajeSeguridad.peso() )
+	}
+	
+	test "nivel de peligrosidad residuos radioactivos." {
+		embalajeSeguridad.objeto(residuosRadioactivos)
+		assert.equals(100, embalajeSeguridad.nivelPeligrosidad(residuosRadioactivos) )
+	}
+		
+}
+
+
+
+
+
+
+
+
+
+
+
