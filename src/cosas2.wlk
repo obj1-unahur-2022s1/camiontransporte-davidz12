@@ -42,7 +42,7 @@ object bateriaAntiaerea {
 	method nivelPeligrosidad() = if(estaConMisiles){100}else{0}
 	method cambiarEstadoMisiles() { estaConMisiles = not estaConMisiles }
 	method cantBultos() = if(!estaConMisiles){1}else{2}
-	method sufrirConsecuencia() {if(!estaConMisiles){self.cambiarEstadoMisiles()}}
+	method sufrirConsecuencia() {estaConMisiles = true}
 }
 
 object contenedor {
@@ -55,7 +55,9 @@ object contenedor {
 	method agregarCosa(unObjeto) { cosas.add(unObjeto) }
 	method sacarCosa(unObjeto) { cosas.remove(unObjeto) }
 	method cantBultos() = 1 + cosas.sum({ c => c.cantBultos() })
-	method sufrirConsecuencia() {cosas.map({ c => c.sufrirConsecuencia() })}
+	method sufrirConsecuencia() {cosas.forEach({ c => c.sufrirConsecuencia() })}
+	//Habia utilizado un .map() pero luego me di cuenta que lo que debe hacer el metodo
+	//es ejecutar el comando sufrirConsecuencia() sobre cada objeto de la lista.
 	
 }
 
